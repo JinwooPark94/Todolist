@@ -1,19 +1,26 @@
-var todos = [ { id: 0, content : 123, completed : true },
+var todos = [ { id: 0, content : '123', completed : true },
               { id: 1, content : 'qwer', completed: false },
               { id: 2, content : 'zcxv', completed: true },
-              { id: 3, content : 1111, completed : true}];
+              { id: 3, content : '1111', completed : true}];
 
 var todoUl = document.querySelector('#todo-list');
 var inputTodo = document.querySelector('#input-todo');
 var buttonAll = document.querySelector('#button-todo');
 var completeAll = document.querySelector('#count-all');
 var selectTodo = document.querySelector('#select-todo');
+var searchTodo = document.querySelector('#search-todo');
 
 window.addEventListener('load', function () {
   loadData();
 });
 
+searchTodo.addEventListener('keyup', function (event) {
+    loadData('search');
+});
+
 inputTodo.addEventListener('keyup', function (event) {
+  console.log(event.target.value);
+  if (!event.target.value) return;
   if (event.keyCode === 13) {
     addTodo(event);
     loadData();
@@ -74,16 +81,27 @@ function loadData(filter){
   var arrayName;
   console.log(filter);
 
+  // 완료 상태
   if (filter === 'comple') {
     arrayName = todos.filter( function (item) {
       return item.completed === true;
     });
     selectTodo.value = 'comple';
+
+    // 미완료 상태
   } else if (filter === 'uncomple') {
     arrayName = todos.filter(function (item) {
       return item.completed === false;
     });
     selectTodo.value = 'uncomple';
+
+    // 자동 검색
+  } else if (filter === 'search') {
+    arrayName = todos.filter( function (item){
+      return (item.content.match(searchTodo.value)) ? true : false;
+    });
+    if (!searchTodo.value) arrayName = todos;
+
   } else {
     arrayName = todos;
     selectTodo.value = 'all';

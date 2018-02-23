@@ -19,6 +19,15 @@ button:focus { outline: none !important; }
 
 .tool-show {
   margin-bottom: 20px;
+  clear: both;
+}
+
+#search-todo{
+  margin-bottom:15px;
+  float: right;
+  padding: 10px;
+  background: white;
+  border: 1px solid #e0e0e0;
 }
 
 #select-todo {
