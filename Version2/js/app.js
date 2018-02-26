@@ -8,10 +8,10 @@
   var todoUl = document.querySelector('#todo-list');
   var inputTodo = document.querySelector('#input-todo');
   var chkAllComple = document.querySelector('#chk-allComplete');
-  var completeAll = document.querySelector('#completedTodos');
   var selectTodo = document.querySelector('.nav');
   var searchTodo = document.querySelector('#search-todo');
   var removeCompleted = document.querySelector('#btn-removeCompletedTodos');
+
   var status = 'all';
 
   window.addEventListener('load', function () {
@@ -19,12 +19,12 @@
   });
 
   searchTodo.addEventListener('keyup', function (event) {
-    loadData('search');
+    status = 'search';
+    loadData();
   });
 
   inputTodo.addEventListener('keyup', function (event) {
-    if (!event.target.value) return;
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && event.target.value) {
       addTodo(event);
       loadData();
     }
@@ -37,12 +37,13 @@
     }
     if (event.target.nodeName === 'INPUT') {
       chkChange(event);
-      loadData(status);
+      loadData();
     }
   });
 
   selectTodo.addEventListener('click', function(event) {
-    loadData(event.target.parentNode.id);
+    status = event.target.parentNode.id;
+    loadData();
   });
 
   chkAllComple.addEventListener('click', function () {
@@ -87,8 +88,8 @@
     return completCount;
   }
 
+  //
   function selectActive(status){
-    console.log(status);
     selectTodo.children.all.removeAttribute('class');
     selectTodo.children.completed.removeAttribute('class');
     selectTodo.children.active.removeAttribute('class');
@@ -97,13 +98,13 @@
   }
 
   // 데이터 로드
-  function loadData(filter) {
+  function loadData() {
     var messageTodo = document.querySelector('#message-todo');
     var todoInner = '';
     var arrayName;
 
     // 완료 상태
-    if (filter === 'completed') {
+    if (status === 'completed') {
       status = 'completed';
       selectActive(status);
 
@@ -112,7 +113,7 @@
       });
 
       // 미완료 상태
-    } else if (filter === 'active') {
+    } else if (status === 'active') {
       status = 'active';
       selectActive(status);
 
@@ -121,7 +122,7 @@
       });
 
       // 자동 검색
-    } else if (filter === 'search') {
+    } else if (status === 'search') {
 
       // 정규 표현식 사용
       var regexr = new RegExp(searchTodo.value, "ig");
@@ -129,11 +130,6 @@
       arrayName = todos.filter(function (item) {
         return regexr.test(item.content);
       });
-
-      // 정규표현식을 사용하지 않을 시
-      /*arrayName = todos.filter( function (item){
-        return (item.content.toLowerCase().match(searchTodo.value.toLowerCase())) ? true : false;
-      }); */
 
       if (!searchTodo.value) arrayName = todos;
 
@@ -164,8 +160,11 @@
     });
 
     todoUl.innerHTML = todoInner;
-    completeAll.innerHTML = '완료된 할일 : ' + countComplete() + '개';
-    activeTodos.innerHTML = todos.length - countComplete();
+    document.querySelector('#completedTodos').innerHTML = '완료된 할일 : ' + countComplete() + '개';
+    //completedTodos.innerHTML = '완료된 할일 : ' + countComplete() + '개';
+
+    document.querySelector('#activeTodos').innerHTML = todos.length - countComplete();
+    //activeTodos.innerHTML = todos.length - countComplete();
   }
 
   // ID값 얻기
