@@ -165,6 +165,7 @@
 
     document.querySelector('#activeTodos').innerHTML = todos.length - countComplete();
     //activeTodos.innerHTML = todos.length - countComplete();
+
   }
 
   // ID값 얻기
