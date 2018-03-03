@@ -17,6 +17,7 @@ module.exports = {
       "comma-dangle": [ "error", "never"],
       "func-names": [2, "never"],
       "linebreak-style": ["error", "windows"],
-      "arrow-parens": ["error", "as-needed"]
+      "arrow-parens": ["error", "as-needed"],
+      "no-param-reassign": [2, { "props": false }]
   }
 };
