@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h1 class="title">Todos</h1>
+      <app-status [presentStatus]="presentStatus"
+                  [statusNavArray]="statusNavArray"
+                  (changePresentStatus)="changePresentStatus($event)"></app-status>
+      <app-input [inputText]="inputText"
+                 (addTodo)="addTodo($event)"></app-input>
+      <app-list [todos]="todos"
+                [presentStatus]="presentStatus"
+                (removeTodo)="removeTodo($event)"
+                (changeCompleted)="changeCompleted($event)"></app-list>
+      <app-footer [todos]="todos"
+                  [completedTodo]="completedTodo()"
+                  (allCompleted)="AllCompleted()"
+                  (clearCompleted)="clearCompleted()"></app-footer>
+    </div>
+  </div>
+</div>
