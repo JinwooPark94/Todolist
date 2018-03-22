@@ -1,3 +1,12 @@
-<p>
-  footer works!
-</p>
+<div class="col-xs-6">
+  <label class="i-checks" style="padding-left: 20px">
+    <input id="chk-allComplete" type="checkbox">
+    <i (click)="AllCompleted.emit()"></i>
+    <span class="select-all">전체 선택</span>
+  </label>
+</div>
+<div class="col-xs-6 text-right">
+  <button class="btn btn-default btn-xs" (click)="clearCompleted.emit()">Clear completed (
+    <span>{{ completedTodo }}</span>)</button>
+  <strong>{{ todos.length - completedTodo }}</strong> items left
+</div>

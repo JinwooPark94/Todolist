@@ -1,3 +1,5 @@
-<p>
-  nav works!
-</p>
+<ul class="nav nav-xs nav-pills">
+  <li *ngFor="let item of statusNavArray" (click)="changePresentStatus.emit(item)" [class.active]="presentStatus===item">
+    <a>{{ item }}</a>
+  </li>
+</ul>

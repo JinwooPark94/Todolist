@@ -1,3 +1,16 @@
-<p>
-  list works!
-</p>
+<ul id="todo-list" class="list-group">
+  <li class="list-group-item" *ngFor="let todo of todos | todosfilter: presentStatus">
+    <div class="hover-anchor">
+      <a class="hover-action text-muted" (click)="removeId(todo.id)">
+        <span class="glyphicon glyphicon-remove-circle pull-right"></span>
+      </a>
+      <label class="i-checks" [for]="todo.id">
+        <input type="checkbox" [id]="todo.id" [checked]="todo.completed" (click)="changeSelectId(todo.id)">
+        <i></i>
+        <span>{{ todo.content }}</span>
+      </label>
+    </div>
+  </li>
+</ul>
+<p class="message-todo" *ngIf="!todos.length">해당 목록이 없습니다.</p>
+<pre>{{ todos | json }}</pre>
