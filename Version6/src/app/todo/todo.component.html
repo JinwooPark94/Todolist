@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h1 class="title">Todos</h1>
+      <div *ngIf="todos">
+      <app-todo-form (addTodo)="addTodo($event)"
+                     [todos]="todos"></app-todo-form>
+      <app-todo-nav [statusNavArray]="statusNavArray"
+                    [presentStatus]="presentStatus"
+                    (changePresentStatus)="changePresentStatus($event)"></app-todo-nav>
+      <app-todo-list [todos]="todos"
+                     [presentStatus]="presentStatus"
+                     (removeTodo)="removeTodo($event)"
+                     (changeCompleted)="changeCompleted($event)"></app-todo-list>
+      <app-todo-footer [todos]="todos"
+                       [completedTodo]="completedTodo()"
+                       (AllCompleted)="AllCompleted()"
+                       (clearCompleted)="clearCompleted()"></app-todo-footer>
+      </div>
+    </div>
+  </div>
+</div>
