@@ -1,0 +1,13 @@
+<div class="col-xs-6">
+  <label class="i-checks" style="padding-left: 20px">
+    <input id="chk-allComplete" type="checkbox">
+    <i (click)="todoService.AllCompleted()"></i>
+    <span class="select-all">전체 선택</span>
+  </label>
+</div>
+<div class="col-xs-6 text-right">
+  <button class="btn btn-default btn-xs" (click)="todoService.clearCompleted()">Clear completed (
+    <span>{{ todoService.completedTodo() }}</span>)</button>
+  <strong>{{ todoService.todos.length - todoService.completedTodo() }}</strong> items left
+</div>
+<pre>{{ todoService.todos | json }}</pre>
